@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
+import Header from './components/Header';
 import './App.css';
 
 class App extends Component {
   render() {
-    const headerStyle = {
-      borderRadius: 0
-    };
-
+    const appTitle = 'JamDodger';
     return (
       <div className="App">
-        <header className="ui inverted segment" style={headerStyle}>
-          <span className="ui white inverted huge header">JamDodger</span>
-        </header>
+        <Header title={appTitle} />
       </div>
     );
   }
