@@ -18,7 +18,7 @@ class App extends Component {
 
         <div className="ui container">
           <div className="column">
-            <div class="ui cards">
+            <div className="ui cards">
               <Card post={post} />
             </div>
           </div>
