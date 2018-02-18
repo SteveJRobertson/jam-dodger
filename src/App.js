@@ -3,10 +3,15 @@ import './App.css';
 
 class App extends Component {
   render() {
+    const headerStyle = {
+      borderRadius: 0
+    };
+
     return (
       <div className="App">
-        <button className="ui primary button">Save</button>
-        <button className="ui button">Discard</button>
+        <header className="ui inverted segment" style={headerStyle}>
+          <span className="ui white inverted huge header">JamDodger</span>
+        </header>
       </div>
     );
   }
