@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
+import Header from './components/Header';
 import './App.css';
 
 class App extends Component {
   render() {
+    const appTitle = 'JamDodger';
     return (
       <div className="App">
-        <button className="ui primary button">Save</button>
-        <button className="ui button">Discard</button>
+        <Header title={appTitle} />
       </div>
     );
   }
