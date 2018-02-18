@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 import Header from './components/Header';
+import Card from './components/Card';
 import './App.css';
 
 class App extends Component {
   render() {
     const appTitle = 'JamDodger';
+    const post = {
+      avatarUrl: 'https://www.placecage.com/35/35',
+      username: 'NicholasCage',
+      time: '5 mins ago',
+      description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eu varius leo, nec feugiat felis. Etiam non iaculis urna, eget tincidunt sed.`
+    };
     return (
       <div className="App">
         <Header title={appTitle} />
@@ -12,21 +19,7 @@ class App extends Component {
         <div className="ui container">
           <div className="column">
             <div class="ui cards">
-              <div className="card jd-card">
-                <div className="content">
-                  <img
-                    className="right floated mini ui image"
-                    src="https://www.placecage.com/35/35"
-                  />
-                  <div className="header">NicholasCage</div>
-                  <div className="meta">5 minutes ago</div>
-                  <div className="description">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Phasellus eu varius leo, nec feugiat felis. Etiam non
-                    iaculis urna, eget tincidunt sed.
-                  </div>
-                </div>
-              </div>
+              <Card post={post} />
             </div>
           </div>
         </div>
