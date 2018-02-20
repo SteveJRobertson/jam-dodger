@@ -6,10 +6,7 @@ class CardList extends Component {
     fetch(
       'https://node-twitter-rest-api.herokuapp.com/search/tweets?q=%23edintravel'
     )
-      .then(res => {
-        console.log(res);
-        res.json();
-      })
+      .then(res => res.json())
       .then(result => {
         this.setState({
           posts: result.statuses
