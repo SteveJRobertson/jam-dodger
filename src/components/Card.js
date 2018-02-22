@@ -3,8 +3,6 @@ import './Card.css';
 
 class Card extends Component {
   render() {
-    console.log(this.props.post);
-
     return (
       <div className="card jd-card">
         <div className="content">
