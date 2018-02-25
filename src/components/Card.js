@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 import './Card.css';
 
@@ -11,7 +12,7 @@ class Card extends Component {
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.setState({
       formattedTime: moment(this.props.time).fromNow()
     });
@@ -34,5 +35,19 @@ class Card extends Component {
     );
   }
 }
+
+Card.defaultProps = {
+  time: '',
+  avatarUrl: '',
+  username: '',
+  description: ''
+};
+
+Card.propTypes = {
+  time: PropTypes.string,
+  avatarUrl: PropTypes.string,
+  username: PropTypes.string,
+  description: PropTypes.string
+};
 
 export default Card;

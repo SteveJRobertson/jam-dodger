@@ -25,7 +25,7 @@ class CardList extends Component {
   render() {
     const cards = this.state.posts.map(post => (
       <Card
-        key={'post-' + post.id}
+        key={`post-${post.id}`}
         avatarUrl={post.user.profile_image_url}
         username={post.user.screen_name}
         time={post.created_at}
