@@ -2,10 +2,12 @@ version: 2
 jobs:
   build:
     working_directory: ~/tmp
+    docker:
+      - image: circleci/node:8.9.1
     machine:
       node:
         version: 8.9.1
     steps:
       - checkout
-      - run: npm install
-      - run: npm test
+      - run: yarn install
+      - run: yarn test
