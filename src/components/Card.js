@@ -8,13 +8,13 @@ class Card extends Component {
     super(props);
 
     this.state = {
-      formattedTime: ''
+      formattedTime: '',
     };
   }
 
   componentWillMount() {
     this.setState({
-      formattedTime: moment(this.props.time).fromNow()
+      formattedTime: moment(this.props.time).fromNow(),
     });
   }
 
@@ -40,14 +40,14 @@ Card.defaultProps = {
   time: '',
   avatarUrl: '',
   username: '',
-  description: ''
+  description: '',
 };
 
 Card.propTypes = {
   time: PropTypes.string,
   avatarUrl: PropTypes.string,
   username: PropTypes.string,
-  description: PropTypes.string
+  description: PropTypes.string,
 };
 
 export default Card;
