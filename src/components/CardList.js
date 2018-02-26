@@ -6,18 +6,16 @@ class CardList extends Component {
     super(props);
 
     this.state = {
-      posts: []
+      posts: [],
     };
   }
 
   componentDidMount() {
-    fetch(
-      'https://node-twitter-rest-api.herokuapp.com/search/tweets?q=%23edintravel'
-    )
+    fetch('https://node-twitter-rest-api.herokuapp.com/search/tweets?q=%23edintravel')
       .then(res => res.json())
-      .then(result => {
+      .then((result) => {
         this.setState({
-          posts: result.statuses
+          posts: result.statuses,
         });
       });
   }
