@@ -1,10 +1,8 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { shallow } from 'enzyme';
 import Card from './Card';
 
 it('renders without crashing', () => {
-  const div = document.createElement('div');
   const mockPost = {};
-  ReactDOM.render(<Card post={mockPost} />, div);
-  ReactDOM.unmountComponentAtNode(div);
+  shallow(<Card post={mockPost} />);
 });
