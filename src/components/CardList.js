@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Card from './Card';
 import fetch from 'isomorphic-fetch';
+import Card from './Card';
 
 class CardList extends Component {
   constructor(props) {
