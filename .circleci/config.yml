@@ -14,5 +14,5 @@ jobs:
         - nvm use 8 && npm run ci
     steps:
       - checkout
-      - run: yarn install
-      - run: yarn test
+      - run: npm install
+      - run: npm test
