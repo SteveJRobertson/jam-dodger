@@ -36,6 +36,11 @@ module.exports = function (wallaby) {
         const jestConfig = require('react-scripts/scripts/utils/createJestConfig')(p => require.resolve('react-scripts/' + p));
         Object.keys(jestConfig.transform || {}).forEach(k => ~k.indexOf('^.+\\.(js|jsx') && void delete jestConfig.transform[k]);
         delete jestConfig.testEnvironment;
+
+        if (jestConfig.setupTestFrameworkScriptFile) {
+          jestConfig.setupTestFrameworkScriptFile = jestConfig.setupTestFrameworkScriptFile.replace('<rootDir>', wallaby.projectCacheDir);
+        }
+
         wallaby.testFramework.configure(jestConfig);
       },
   
