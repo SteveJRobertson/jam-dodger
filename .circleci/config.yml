@@ -16,4 +16,4 @@ jobs:
       - checkout
       - run: npm install
       - run: npm test
-      - run: $(npm bin)/cypress run --record --key
+      - run: $(npm bin)/cypress run --record
