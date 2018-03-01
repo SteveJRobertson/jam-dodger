@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import Card from './Card';
 import fetch from 'isomorphic-fetch';
+import Card from './Card';
+import fetchData from '../api/fetchData';
 
 class CardList extends Component {
   constructor(props) {
@@ -12,8 +13,7 @@ class CardList extends Component {
   }
 
   componentDidMount() {
-    fetch('https://node-twitter-rest-api.herokuapp.com/search/tweets?q=%23edintravel')
-      .then(res => res.json())
+    fetchData.traffic(fetch)
       .then((result) => {
         this.setState({
           posts: result.statuses,
