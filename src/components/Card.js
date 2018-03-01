@@ -27,9 +27,9 @@ class Card extends Component {
             src={this.props.avatarUrl}
             alt={this.props.username}
           />
-          <div className="header">{this.state.formattedTime}</div>
-          <div className="meta">{this.props.username}</div>
-          <div className="description">{this.props.description}</div>
+          <div className="header jd-time">{this.state.formattedTime}</div>
+          <div className="meta jd-username">{this.props.username}</div>
+          <div className="description jd-text">{this.props.description}</div>
         </div>
       </div>
     );

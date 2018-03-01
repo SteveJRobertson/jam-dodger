@@ -16,6 +16,7 @@ jobs:
       - checkout
       - run: npm install
       - run: npm test -- --coverage
+      # - run: npm start
       - run: $(npm bin)/cypress run --record
     post:
       - npm install -g codeclimate-test-reporter
