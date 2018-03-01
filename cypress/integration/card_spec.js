@@ -1,34 +1,33 @@
 describe('Card component', () => {
+  let card;
+  let img;
+
   before(() => {
     cy.visit('http://localhost:3000');
     cy.wait(2000); // Should probably do something better here with cy.wait()
+
+    card = cy.get('.App')
+      .find('.cards')  
+      .find(':nth-child(1)');
+
+    img = card.find('img');
   });
 
   it('Card image has a src attribute', () => {
-    cy.get('.App')
-      .find('.jd-card').first()
-      .find('img')
-      .should('have.attr', 'src');
+    img.should('have.attr', 'src');
   });
   
   it('Card image has an alt attribute', () => {
-    cy.get('.App')
-      .find('.jd-card').first()
-      .find('img')
-      .should('have.attr', 'alt');
+    img.should('have.attr', 'alt');
   });
 
   it('Card has a time', () => {
-    cy.get('.App')
-      .find('.cards')  
-      .find(':nth-child(1) > .content > .header')
+    card.find('.content > .header')
       .should('have.class', 'jd-time');
   });
 
   it('Card has a username', () => {
-    cy.get('.App')
-      .find('.cards')  
-      .find(':nth-child(1) > .content > .meta')
+    card.find('.content > .meta')
       .should('have.class', 'jd-username');
   });
 
