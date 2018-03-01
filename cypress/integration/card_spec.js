@@ -32,9 +32,7 @@ describe('Card component', () => {
   });
 
   it('Card has a description', () => {
-    cy.get('.App')
-    .find('.cards')
-    .find(':nth-child(1) > .content > .description')
-    .should('have.class', 'jd-text');
+    card.find('.content > .description')
+      .should('have.class', 'jd-text');
   });
 });
