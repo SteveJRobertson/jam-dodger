@@ -10,6 +10,7 @@ jobs:
         - nvm install 8 && npm install
     test:
       override:
+        - npm test -- --coverage
         - nvm use 8 && npm run test-server-all
         - nvm use 8 && npm run ci
     steps:
