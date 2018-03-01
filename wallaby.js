@@ -43,6 +43,8 @@ module.exports = function (wallaby) {
 
         wallaby.testFramework.configure(jestConfig);
       },
+
+      lowCoverageThreshold: 90,
   
       testFramework: 'jest'
     };
