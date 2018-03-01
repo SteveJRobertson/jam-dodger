@@ -16,7 +16,7 @@ jobs:
       - checkout
       - run: npm install
       - run: npm test -- --coverage
-      - run: $(npm bin)/cypress run --record
+      # - run: $(npm bin)/cypress run --record
     post:
       - npm install -g codeclimate-test-reporter
       - codeclimate-test-reporter < coverage/lcov.info
