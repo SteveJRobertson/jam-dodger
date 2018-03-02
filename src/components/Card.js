@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import './Card.css';
 
+/**
+ * A card component displaying a single status update from Twitter.
+ */
 class Card extends Component {
   constructor(props) {
     super(props);
