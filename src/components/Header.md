@@ -1,10 +1,12 @@
-Default Header example
+### Header examples
+
+#### Default
 
 ```js
 <Header />
 ```
 
-Header example with title prop
+#### Example with title prop
 
 ```js
 <Header title={'JamDodger'} />
