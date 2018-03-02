@@ -26,10 +26,13 @@
     "prop-types": "15.6.0",
     "react": "16.2.0",
     "react-dom": "16.2.0",
+    "react-styleguidist": "^6.2.5",
     "semantic-ui-css": "2.3.0",
     "semantic-ui-react": "0.78.3"
   },
   "scripts": {
+    "styleguide": "styleguidist server",
+    "styleguide:server": "styleguidist build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
