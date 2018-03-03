@@ -1,8 +1,8 @@
-### Default card example
+### Default status card example
 
 ```js
 <div className="ui cards">
-  <Card
+  <StatusCard
     key={'post-123456789012345678'}
     avatarUrl={'https://via.placeholder.com/35x35'}
     username={'JoeBloggs'}

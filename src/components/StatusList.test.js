@@ -1,38 +1,38 @@
 import React from 'react';
 import fetch from 'isomorphic-fetch';
 import { shallow, mount } from 'enzyme';
-import CardList from './CardList';
+import StatusList from './StatusList';
 
 import fetchData from '../api/fetchData';
 
-describe('CardList component', () => {
+describe('StatusList component', () => {
   let component;
 
   it('renders without crashing', () => {
-    component = shallow(<CardList />);
+    component = shallow(<StatusList />);
     expect(component.exists()).toEqual(true);
   });
 
   describe('fetch data from the api', () => {
     let mockFetchTrafficData;
-    const trafficData = [
+    const twitterData = [
       {
         created_at: '',
         id: 1,
         text: '',
         user: {
           profile_image_url: '',
-          screen_name: '',
+          name: '',
         },
       },
     ];
 
     beforeEach(() => {
-      fetch = jest.fn().mockReturnValue(Promise.resolve(trafficData));
+      fetch = jest.fn().mockReturnValue(Promise.resolve(twitterData));
       mockFetchTrafficData = jest.spyOn(fetchData, 'traffic').mockReturnValue(Promise.resolve({
-        statuses: trafficData,
+        statuses: twitterData,
       }));
-      component = mount(<CardList />);
+      component = mount(<StatusList />);
     });
 
     afterEach(() => {
@@ -44,7 +44,7 @@ describe('CardList component', () => {
     });
 
     it('returns the data', () => {
-      expect(component.state().posts).toEqual(trafficData);
+      expect(component.state().statuses).toEqual(twitterData);
     });
   });
 });

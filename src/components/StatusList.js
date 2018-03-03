@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import fetch from 'isomorphic-fetch';
-import Card from './Card';
+import StatusCard from './StatusCard';
 import fetchData from '../api/fetchData';
 
-class CardList extends Component {
+class StatusList extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      posts: [],
+      statuses: [],
     };
   }
 
@@ -16,30 +16,30 @@ class CardList extends Component {
     fetchData.traffic(fetch)
       .then((result) => {
         this.setState({
-          posts: result.statuses,
+          statuses: result.statuses,
         });
       });
   }
 
   render() {
-    const cards = this.state.posts.map(post => (
-      <Card
-        key={`post-${post.id}`}
-        avatarUrl={post.user.profile_image_url}
-        username={post.user.screen_name}
-        time={post.created_at}
-        description={post.text}
+    const statusCards = this.state.statuses.map(status => (
+      <StatusCard
+        key={`post-${status.id}`}
+        avatarUrl={status.user.profile_image_url}
+        name={status.user.name}
+        time={status.created_at}
+        description={status.text}
       />
     ));
 
     return (
       <div className="ui container">
         <div className="column">
-          <div className="ui cards">{cards}</div>
+          <div className="ui cards">{statusCards}</div>
         </div>
       </div>
     );
   }
 }
 
-export default CardList;
+export default StatusList;
