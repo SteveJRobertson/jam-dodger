@@ -1,6 +1,6 @@
 import React from 'react';
 import fetch from 'isomorphic-fetch';
-import { shallow, mount } from 'enzyme';
+import { mount } from 'enzyme';
 import StatusList from './StatusList';
 
 import fetchData from '../api/fetchData';
@@ -8,12 +8,17 @@ import fetchData from '../api/fetchData';
 describe('StatusList component', () => {
   let component;
 
-  it('renders without crashing', () => {
-    component = shallow(<StatusList />);
-    expect(component.exists()).toEqual(true);
+  describe('initialise', () => {
+    it('renders without crashing', () => {
+      component = mount(<StatusList />);
+      expect(component.exists()).toEqual(true);
+      component.unmount();
+    });
   });
 
   describe('fetch data from the api', () => {
+    jest.useFakeTimers();
+
     let mockFetchTrafficData;
     const twitterData = [
       {
@@ -27,7 +32,7 @@ describe('StatusList component', () => {
       },
     ];
 
-    beforeEach(() => {
+    beforeAll(() => {
       fetch = jest.fn().mockReturnValue(Promise.resolve(twitterData));
       mockFetchTrafficData = jest.spyOn(fetchData, 'traffic').mockReturnValue(Promise.resolve({
         statuses: twitterData,
@@ -35,7 +40,7 @@ describe('StatusList component', () => {
       component = mount(<StatusList />);
     });
 
-    afterEach(() => {
+    afterAll(() => {
       component.unmount();
     });
 
@@ -45,6 +50,20 @@ describe('StatusList component', () => {
 
     it('returns the data', () => {
       expect(component.state().statuses).toEqual(twitterData);
+    });
+
+    it('fetches the data just once', () => {
+      expect(mockFetchTrafficData).toHaveBeenCalledTimes(1);
+    });
+
+    describe('after the interval has passed', () => {
+      beforeEach(() => {
+        jest.runTimersToTime(60000);
+      });
+
+      it('fetches more traffic data from the api', () => {
+        expect(mockFetchTrafficData).toHaveBeenCalledTimes(2);
+      });
     });
   });
 });

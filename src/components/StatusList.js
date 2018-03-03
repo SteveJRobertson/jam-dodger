@@ -13,6 +13,16 @@ class StatusList extends Component {
   }
 
   componentDidMount() {
+    this.fetchTrafficData();
+    this.loadInterval = setInterval(() => this.fetchTrafficData(), 60000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.loadInterval);
+    this.loadInterval = false;
+  }
+
+  fetchTrafficData() {
     fetchData.traffic(fetch)
       .then((result) => {
         this.setState({
