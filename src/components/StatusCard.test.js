@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Card from './Card';
+import StatusCard from './StatusCard';
 
 it('renders without crashing', () => {
   const mockPost = {};
-  shallow(<Card post={mockPost} />);
+  shallow(<StatusCard post={mockPost} />);
 });

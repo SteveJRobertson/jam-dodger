@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import './Card.css';
+import './StatusCard.css';
 
 /**
  * A card component displaying a single status update from Twitter.
  */
-class Card extends Component {
+class StatusCard extends Component {
   constructor(props) {
     super(props);
 
@@ -28,10 +28,10 @@ class Card extends Component {
           <img
             className="right floated mini ui image"
             src={this.props.avatarUrl}
-            alt={this.props.username}
+            alt={this.props.name}
           />
           <div className="header jd-time">{this.state.formattedTime}</div>
-          <div className="meta jd-username">{this.props.username}</div>
+          <div className="meta jd-username">{this.props.name}</div>
           <div className="description jd-text">{this.props.description}</div>
         </div>
       </div>
@@ -39,18 +39,18 @@ class Card extends Component {
   }
 }
 
-Card.defaultProps = {
+StatusCard.defaultProps = {
   time: '',
   avatarUrl: '',
-  username: '',
+  name: '',
   description: '',
 };
 
-Card.propTypes = {
+StatusCard.propTypes = {
   time: PropTypes.string,
   avatarUrl: PropTypes.string,
-  username: PropTypes.string,
+  name: PropTypes.string,
   description: PropTypes.string,
 };
 
-export default Card;
+export default StatusCard;

@@ -10,7 +10,7 @@ const fetchData = {
   },
 
   traffic(fetch) {
-    return this.fromTwitter(fetch, '%23edintravel');
+    return this.fromTwitter(fetch, '%23edintravel%20-RT');
   },
 };
 

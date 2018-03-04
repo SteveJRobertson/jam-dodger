@@ -53,7 +53,7 @@ describe('fetchData.traffic', () => {
   it('calls fetchData.fromTwitter with the correct parameters', () => {
     expect(mockFromTwitterMethod).toHaveBeenCalledWith(
       mockFetch,
-      '%23edintravel',
+      '%23edintravel%20-RT',
     );
   });
 });
