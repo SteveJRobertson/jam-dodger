@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import fetch from 'isomorphic-fetch';
+import _ from 'lodash';
 import StatusCard from './StatusCard';
 import fetchData from '../api/fetchData';
 
@@ -14,7 +15,7 @@ class StatusList extends Component {
 
   componentDidMount() {
     this.fetchTrafficData();
-    this.loadInterval = setInterval(() => this.fetchTrafficData(), 60000);
+    this.loadInterval = setInterval(() => this.fetchMoreTrafficData(), 60000);
   }
 
   componentWillUnmount() {
@@ -28,6 +29,15 @@ class StatusList extends Component {
         this.setState({
           statuses: result.statuses,
         });
+      });
+  }
+
+  fetchMoreTrafficData() {
+    fetchData.traffic(fetch)
+      .then((result) => {
+        this.setState(prevState => ({
+          statuses: _.uniqBy(prevState.statuses.concat(result.statuses), 'id'),
+        }));
       });
   }
 
