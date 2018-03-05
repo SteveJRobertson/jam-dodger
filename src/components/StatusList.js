@@ -44,7 +44,7 @@ class StatusList extends Component {
   render() {
     const statusCards = this.state.statuses.map(status => (
       <StatusCard
-        key={`post-${status.id}`}
+        key={`status-${status.id}`}
         avatarUrl={status.user.profile_image_url}
         name={status.user.name}
         time={status.created_at}

@@ -17,7 +17,8 @@ class StatusCard extends Component {
 
   componentWillMount() {
     this.setState({
-      formattedTime: moment(this.props.time).fromNow(),
+      // Parsing Twitter date in a format moment can handle without throwing a warning
+      formattedTime: moment(this.props.time, 'dd MMM DD HH:mm:ss ZZ YYYY', 'en').fromNow(),
     });
   }
 
