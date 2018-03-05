@@ -4,6 +4,9 @@ import _ from 'lodash';
 import StatusCard from './StatusCard';
 import fetchData from '../api/fetchData';
 
+/**
+ * A list of card components populated by a fetch call to Twitter.
+*/
 class StatusList extends Component {
   constructor(props) {
     super(props);
@@ -44,7 +47,7 @@ class StatusList extends Component {
   render() {
     const statusCards = this.state.statuses.map(status => (
       <StatusCard
-        key={`post-${status.id}`}
+        key={`status-${status.id}`}
         avatarUrl={status.user.profile_image_url}
         name={status.user.name}
         time={status.created_at}
