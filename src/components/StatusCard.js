@@ -15,7 +15,17 @@ class StatusCard extends Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
+    this.formatTimeFromNow();
+    this.loadInterval = setInterval(() => this.formatTimeFromNow(), 60000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.loadInterval);
+    this.loadInterval = false;
+  }
+
+  formatTimeFromNow() {
     this.setState({
       // Parsing Twitter date in a format moment can handle without throwing a warning
       formattedTime: moment(this.props.time, 'dd MMM DD HH:mm:ss ZZ YYYY', 'en').fromNow(),

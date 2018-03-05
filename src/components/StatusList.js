@@ -4,6 +4,9 @@ import _ from 'lodash';
 import StatusCard from './StatusCard';
 import fetchData from '../api/fetchData';
 
+/**
+ * A list of card components populated by a fetch call to Twitter.
+*/
 class StatusList extends Component {
   constructor(props) {
     super(props);
