@@ -38,6 +38,7 @@ class StatusList extends Component {
   }
 
   fetchTrafficData() {
+    // Get the most recent status ID from the list (i.e. the first one). If none, set to null.
     const lastId = this.state.statuses.length > 0 ? this.state.statuses[0].id : null;
 
     fetchData.traffic(fetch, lastId)
@@ -47,8 +48,18 @@ class StatusList extends Component {
         jdConfig.timeLimit.units,
       ))
       .then((statuses) => {
+        if (lastId) {
+          return statuses.map(status => ({
+            newStatus: true,
+            ...status,
+          }));
+        }
+
+        return statuses;
+      })
+      .then((newStatuses) => {
         this.setState(prevState => ({
-          statuses: _.uniqBy(statuses.concat(prevState.statuses), 'id'),
+          statuses: _.uniqBy([...newStatuses, ...prevState.statuses], 'id'),
         }));
       });
   }
