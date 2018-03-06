@@ -82,7 +82,7 @@ describe('StatusList component', () => {
     });
 
     it('fetches traffic data from the api', () => {
-      expect(mockFetchTrafficData).toHaveBeenCalledWith(fetch);
+      expect(mockFetchTrafficData).toHaveBeenCalledWith(fetch, null);
     });
 
     it('returns the data', () => {

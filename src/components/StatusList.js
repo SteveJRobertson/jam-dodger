@@ -29,7 +29,7 @@ class StatusList extends Component {
 
   componentDidMount() {
     this.fetchTrafficData();
-    this.loadInterval = setInterval(() => this.fetchMoreTrafficData(), jdConfig.refreshRate);
+    this.loadInterval = setInterval(() => this.fetchTrafficData(), jdConfig.refreshRate);
   }
 
   componentWillUnmount() {
@@ -38,33 +38,18 @@ class StatusList extends Component {
   }
 
   fetchTrafficData() {
-    fetchData.traffic(fetch)
-      .then((result) => {
-        this.setState({
-          statuses: StatusList.limitResultsByTime(
-            result.statuses,
-            jdConfig.timeLimit.value,
-            jdConfig.timeLimit.units,
-          ),
-        });
-      });
-  }
+    const lastId = this.state.statuses.length > 0 ? this.state.statuses[0].id : null;
 
-  fetchMoreTrafficData() {
-    const lastId = this.state.statuses[0].id;
     fetchData.traffic(fetch, lastId)
-      .then((result) => {
-        this.setState((prevState) => {
-          const newStatusList = _.uniqBy(result.statuses.concat(prevState.statuses), 'id');
-
-          return {
-            statuses: StatusList.limitResultsByTime(
-              newStatusList,
-              jdConfig.timeLimit.value,
-              jdConfig.timeLimit.units,
-            ),
-          };
-        });
+      .then(result => StatusList.limitResultsByTime(
+        result.statuses,
+        jdConfig.timeLimit.value,
+        jdConfig.timeLimit.units,
+      ))
+      .then((statuses) => {
+        this.setState(prevState => ({
+          statuses: _.uniqBy(statuses.concat(prevState.statuses), 'id'),
+        }));
       });
   }
 
@@ -76,6 +61,7 @@ class StatusList extends Component {
         name={status.user.name}
         time={status.created_at}
         description={status.text}
+        data-new-status={status.new}
       />
     ));
 
