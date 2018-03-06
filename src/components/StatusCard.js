@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import jdConfig from '../jamdodger.config';
 import './StatusCard.css';
 
 /**
@@ -17,7 +18,7 @@ class StatusCard extends Component {
 
   componentDidMount() {
     this.formatTimeFromNow();
-    this.loadInterval = setInterval(() => this.formatTimeFromNow(), 60000);
+    this.loadInterval = setInterval(() => this.formatTimeFromNow(), jdConfig.refreshRate);
   }
 
   componentWillUnmount() {
@@ -28,7 +29,7 @@ class StatusCard extends Component {
   formatTimeFromNow() {
     this.setState({
       // Parsing Twitter date in a format moment can handle without throwing a warning
-      formattedTime: moment(this.props.time, 'dd MMM DD HH:mm:ss ZZ YYYY', 'en').fromNow(),
+      formattedTime: moment(this.props.time, jdConfig.momentTwitterDateFormat, 'en').fromNow(),
     });
   }
 
