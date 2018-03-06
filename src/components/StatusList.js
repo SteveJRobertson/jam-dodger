@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import fetch from 'isomorphic-fetch';
 import _ from 'lodash';
+import moment from 'moment';
+import jdConfig from '../jamdodger.config';
 import StatusCard from './StatusCard';
 import fetchData from '../api/fetchData';
 
@@ -8,6 +10,15 @@ import fetchData from '../api/fetchData';
  * A list of card components populated by a fetch call to Twitter.
 */
 class StatusList extends Component {
+  static limitResultsByTime(statuses, period, unit) {
+    return statuses.filter((status) => {
+      const timeLimit = moment().subtract(period, unit);
+      const statusCreatedAt = moment(status.created_at, jdConfig.momentTwitterDateFormat, 'en');
+
+      return statusCreatedAt.diff(timeLimit) >= 0;
+    });
+  }
+
   constructor(props) {
     super(props);
 
@@ -18,7 +29,7 @@ class StatusList extends Component {
 
   componentDidMount() {
     this.fetchTrafficData();
-    this.loadInterval = setInterval(() => this.fetchMoreTrafficData(), 60000);
+    this.loadInterval = setInterval(() => this.fetchMoreTrafficData(), jdConfig.refreshRate);
   }
 
   componentWillUnmount() {
@@ -30,7 +41,11 @@ class StatusList extends Component {
     fetchData.traffic(fetch)
       .then((result) => {
         this.setState({
-          statuses: result.statuses,
+          statuses: StatusList.limitResultsByTime(
+            result.statuses,
+            jdConfig.timeLimit.value,
+            jdConfig.timeLimit.units,
+          ),
         });
       });
   }
@@ -39,9 +54,17 @@ class StatusList extends Component {
     const lastId = this.state.statuses[0].id;
     fetchData.traffic(fetch, lastId)
       .then((result) => {
-        this.setState(prevState => ({
-          statuses: _.uniqBy(result.statuses.concat(prevState.statuses), 'id'),
-        }));
+        this.setState((prevState) => {
+          const newStatusList = _.uniqBy(result.statuses.concat(prevState.statuses), 'id');
+
+          return {
+            statuses: StatusList.limitResultsByTime(
+              newStatusList,
+              jdConfig.timeLimit.value,
+              jdConfig.timeLimit.units,
+            ),
+          };
+        });
       });
   }
 

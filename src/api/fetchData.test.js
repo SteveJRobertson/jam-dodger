@@ -48,7 +48,7 @@ describe('fetchData.traffic', () => {
     mockFromTwitterMethod = jest.spyOn(fetchData, 'fromTwitter');
   });
 
-  describe('with no params', () => {
+  describe('initial fetch', () => {
     beforeEach(() => {
       fetchData.traffic(mockFetch);
     });
@@ -61,7 +61,7 @@ describe('fetchData.traffic', () => {
     });
   });
 
-  describe('with params', () => {
+  describe('fetch more results', () => {
     beforeEach(() => {
       fetchData.traffic(mockFetch, 15);
     });
