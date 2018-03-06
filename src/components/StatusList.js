@@ -36,10 +36,11 @@ class StatusList extends Component {
   }
 
   fetchMoreTrafficData() {
-    fetchData.traffic(fetch)
+    const lastId = this.state.statuses[0].id;
+    fetchData.traffic(fetch, lastId)
       .then((result) => {
         this.setState(prevState => ({
-          statuses: _.uniqBy(prevState.statuses.concat(result.statuses), 'id'),
+          statuses: _.uniqBy(result.statuses.concat(prevState.statuses), 'id'),
         }));
       });
   }
