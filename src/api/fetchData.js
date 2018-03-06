@@ -5,12 +5,18 @@ const fetchData = {
   },
 
   fromTwitter(fetch, query) {
-    const twitterApiUrl = 'https://node-twitter-rest-api.herokuapp.com/search/tweets?q=';
-    return this.fromApi(fetch, twitterApiUrl + query);
+    const twitterApiCall = `https://node-twitter-rest-api.herokuapp.com/search/tweets?q=${query}`;
+    return this.fromApi(fetch, twitterApiCall);
   },
 
-  traffic(fetch) {
-    return this.fromTwitter(fetch, '%23edintravel%20-RT');
+  traffic(fetch, lastId) {
+    let queryString = '%23edintravel%20-RT&result_type=recent';
+
+    if (lastId) {
+      queryString += `&since_id=${lastId}`;
+    }
+
+    return this.fromTwitter(fetch, queryString);
   },
 };
 

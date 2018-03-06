@@ -42,19 +42,6 @@ describe('StatusList component', () => {
     const moreTwitterData = [
       { created_at: '', id: 17, text: '', user: { profile_image_url: '', name: '' } },
       { created_at: '', id: 16, text: '', user: { profile_image_url: '', name: '' } },
-      { created_at: '', id: 15, text: '', user: { profile_image_url: '', name: '' } },
-      { created_at: '', id: 14, text: '', user: { profile_image_url: '', name: '' } },
-      { created_at: '', id: 13, text: '', user: { profile_image_url: '', name: '' } },
-      { created_at: '', id: 12, text: '', user: { profile_image_url: '', name: '' } },
-      { created_at: '', id: 11, text: '', user: { profile_image_url: '', name: '' } },
-      { created_at: '', id: 10, text: '', user: { profile_image_url: '', name: '' } },
-      { created_at: '', id: 9, text: '', user: { profile_image_url: '', name: '' } },
-      { created_at: '', id: 8, text: '', user: { profile_image_url: '', name: '' } },
-      { created_at: '', id: 7, text: '', user: { profile_image_url: '', name: '' } },
-      { created_at: '', id: 6, text: '', user: { profile_image_url: '', name: '' } },
-      { created_at: '', id: 5, text: '', user: { profile_image_url: '', name: '' } },
-      { created_at: '', id: 4, text: '', user: { profile_image_url: '', name: '' } },
-      { created_at: '', id: 3, text: '', user: { profile_image_url: '', name: '' } },
     ];
 
     beforeAll(() => {
@@ -104,6 +91,10 @@ describe('StatusList component', () => {
 
       it('adds the new results to the existing list', () => {
         expect(component.state().statuses.length).toBe(17);
+      });
+
+      it('adds the new results to the top of the existing list', () => {
+        expect(component.state().statuses[0].id).toBe(17);
       });
     });
   });

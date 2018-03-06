@@ -46,14 +46,31 @@ describe('fetchData.traffic', () => {
 
   beforeEach(() => {
     mockFromTwitterMethod = jest.spyOn(fetchData, 'fromTwitter');
-
-    fetchData.traffic(mockFetch);
   });
 
-  it('calls fetchData.fromTwitter with the correct parameters', () => {
-    expect(mockFromTwitterMethod).toHaveBeenCalledWith(
-      mockFetch,
-      '%23edintravel%20-RT',
-    );
+  describe('with no params', () => {
+    beforeEach(() => {
+      fetchData.traffic(mockFetch);
+    });
+
+    it('calls fetchData.fromTwitter with the correct parameters', () => {
+      expect(mockFromTwitterMethod).toHaveBeenCalledWith(
+        mockFetch,
+        '%23edintravel%20-RT&result_type=recent',
+      );
+    });
+  });
+
+  describe('with params', () => {
+    beforeEach(() => {
+      fetchData.traffic(mockFetch, 15);
+    });
+
+    it('calls fetchData.fromTwitter for more results', () => {
+      expect(mockFromTwitterMethod).toHaveBeenCalledWith(
+        mockFetch,
+        '%23edintravel%20-RT&result_type=recent&since_id=15',
+      );
+    });
   });
 });
