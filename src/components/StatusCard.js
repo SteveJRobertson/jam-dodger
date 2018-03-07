@@ -35,7 +35,7 @@ class StatusCard extends Component {
 
   render() {
     return (
-      <div className="card jd-card">
+      <div className="card jd-card" data-new-status={this.props.newStatus}>
         <div className="content">
           <img
             className="right floated mini ui image"
@@ -56,6 +56,7 @@ StatusCard.defaultProps = {
   avatarUrl: '',
   name: '',
   description: '',
+  newStatus: false,
 };
 
 StatusCard.propTypes = {
@@ -63,6 +64,7 @@ StatusCard.propTypes = {
   avatarUrl: PropTypes.string,
   name: PropTypes.string,
   description: PropTypes.string,
+  newStatus: PropTypes.bool,
 };
 
 export default StatusCard;

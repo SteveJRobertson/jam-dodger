@@ -69,7 +69,7 @@ describe('fetchData.traffic', () => {
     it('calls fetchData.fromTwitter for more results', () => {
       expect(mockFromTwitterMethod).toHaveBeenCalledWith(
         mockFetch,
-        '%23edintravel%20-RT&result_type=recent&since_id=15',
+        '%23edintravel%20-RT&result_type=recent&since_id=16',
       );
     });
   });

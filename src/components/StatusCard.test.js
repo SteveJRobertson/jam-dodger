@@ -29,6 +29,7 @@ describe('StatusCard component', () => {
           profile_image_url: '',
         },
         text: '',
+        newStatus: false,
       };
     });
 
@@ -43,6 +44,7 @@ describe('StatusCard component', () => {
         name={status.user.name}
         time={status.created_at}
         description={status.text}
+        newStatus={status.newStatus}
       />);
     });
 

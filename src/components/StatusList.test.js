@@ -41,19 +41,6 @@ describe('StatusList component', () => {
     const moreTwitterData = [
       { created_at: 'Wed Feb 28 19:48:52 +0000 2018', id: 17, text: '', user: { profile_image_url: '', name: '' } },
       { created_at: 'Wed Feb 28 19:42:25 +0000 2018', id: 16, text: '', user: { profile_image_url: '', name: '' } },
-      { created_at: 'Wed Feb 28 19:38:13 +0000 2018', id: 15, text: '', user: { profile_image_url: '', name: '' } },
-      { created_at: 'Wed Feb 28 19:33:13 +0000 2018', id: 14, text: '', user: { profile_image_url: '', name: '' } },
-      { created_at: 'Wed Feb 28 19:26:26 +0000 2018', id: 13, text: '', user: { profile_image_url: '', name: '' } },
-      { created_at: 'Wed Feb 28 19:23:51 +0000 2018', id: 12, text: '', user: { profile_image_url: '', name: '' } },
-      { created_at: 'Wed Feb 28 19:23:40 +0000 2018', id: 11, text: '', user: { profile_image_url: '', name: '' } },
-      { created_at: 'Wed Feb 28 18:19:16 +0000 2018', id: 10, text: '', user: { profile_image_url: '', name: '' } },
-      { created_at: 'Wed Feb 28 18:16:55 +0000 2018', id: 9, text: '', user: { profile_image_url: '', name: '' } },
-      { created_at: 'Wed Feb 28 18:15:38 +0000 2018', id: 8, text: '', user: { profile_image_url: '', name: '' } },
-      { created_at: 'Wed Feb 28 17:15:34 +0000 2018', id: 7, text: '', user: { profile_image_url: '', name: '' } },
-      { created_at: 'Wed Feb 28 17:13:55 +0000 2018', id: 6, text: '', user: { profile_image_url: '', name: '' } },
-      { created_at: 'Wed Feb 28 17:13:41 +0000 2018', id: 5, text: '', user: { profile_image_url: '', name: '' } },
-      { created_at: 'Wed Feb 28 16:12:24 +0000 2018', id: 4, text: '', user: { profile_image_url: '', name: '' } },
-      { created_at: 'Wed Feb 28 16:11:35 +0000 2018', id: 3, text: '', user: { profile_image_url: '', name: '' } },
     ];
 
     beforeAll(() => {
@@ -81,33 +68,35 @@ describe('StatusList component', () => {
       component.unmount();
     });
 
-    it('fetches traffic data from the api', () => {
-      expect(mockFetchTrafficData).toHaveBeenCalledWith(fetch);
+    describe('initial fetch', () => {
+      it('fetches traffic data from the api', () => {
+        expect(mockFetchTrafficData).toHaveBeenCalledWith(fetch, null);
+      });
+
+      it('returns the data', () => {
+        expect(component.state().statuses).toEqual([
+          { created_at: 'Wed Feb 28 19:38:13 +0000 2018', id: 15, text: '', user: { profile_image_url: '', name: '' } },
+          { created_at: 'Wed Feb 28 19:33:13 +0000 2018', id: 14, text: '', user: { profile_image_url: '', name: '' } },
+          { created_at: 'Wed Feb 28 19:26:26 +0000 2018', id: 13, text: '', user: { profile_image_url: '', name: '' } },
+          { created_at: 'Wed Feb 28 19:23:51 +0000 2018', id: 12, text: '', user: { profile_image_url: '', name: '' } },
+          { created_at: 'Wed Feb 28 19:23:40 +0000 2018', id: 11, text: '', user: { profile_image_url: '', name: '' } },
+          { created_at: 'Wed Feb 28 18:19:16 +0000 2018', id: 10, text: '', user: { profile_image_url: '', name: '' } },
+          { created_at: 'Wed Feb 28 18:16:55 +0000 2018', id: 9, text: '', user: { profile_image_url: '', name: '' } },
+          { created_at: 'Wed Feb 28 18:15:38 +0000 2018', id: 8, text: '', user: { profile_image_url: '', name: '' } },
+        ]);
+      });
+
+      it('returns results within the last two hours', () => {
+        expect(component.state().statuses.length).toBe(8);
+      });
+
+      it('fetches the data just once', () => {
+        expect(mockFetchTrafficData).toHaveBeenCalledTimes(1);
+      });
     });
 
-    it('returns the data', () => {
-      expect(component.state().statuses).toEqual([
-        { created_at: 'Wed Feb 28 19:38:13 +0000 2018', id: 15, text: '', user: { profile_image_url: '', name: '' } },
-        { created_at: 'Wed Feb 28 19:33:13 +0000 2018', id: 14, text: '', user: { profile_image_url: '', name: '' } },
-        { created_at: 'Wed Feb 28 19:26:26 +0000 2018', id: 13, text: '', user: { profile_image_url: '', name: '' } },
-        { created_at: 'Wed Feb 28 19:23:51 +0000 2018', id: 12, text: '', user: { profile_image_url: '', name: '' } },
-        { created_at: 'Wed Feb 28 19:23:40 +0000 2018', id: 11, text: '', user: { profile_image_url: '', name: '' } },
-        { created_at: 'Wed Feb 28 18:19:16 +0000 2018', id: 10, text: '', user: { profile_image_url: '', name: '' } },
-        { created_at: 'Wed Feb 28 18:16:55 +0000 2018', id: 9, text: '', user: { profile_image_url: '', name: '' } },
-        { created_at: 'Wed Feb 28 18:15:38 +0000 2018', id: 8, text: '', user: { profile_image_url: '', name: '' } },
-      ]);
-    });
-
-    it('returns results within the last two hours', () => {
-      expect(component.state().statuses.length).toBe(8);
-    });
-
-    it('fetches the data just once', () => {
-      expect(mockFetchTrafficData).toHaveBeenCalledTimes(1);
-    });
-
-    describe('after the interval has passed', () => {
-      beforeEach(() => {
+    describe('subsequent fetch with new data', () => {
+      beforeAll(() => {
         jest.runTimersToTime(60000);
       });
 
@@ -121,6 +110,34 @@ describe('StatusList component', () => {
 
       it('adds the new results to the top of the existing list', () => {
         expect(component.state().statuses[0].id).toBe(17);
+      });
+
+      it('adds a newStatus attribute to the new results', () => {
+        expect(component.state().statuses[0].newStatus).toBe(true);
+        expect(component.state().statuses[1].newStatus).toBe(true);
+        expect(component.state().statuses[2].newStatus).toBe(false);
+      });
+    });
+
+    describe('subsequent fetch with no new data', () => {
+      beforeAll(() => {
+        jest.runTimersToTime(60000);
+      });
+
+      it('fetches more traffic data from the api', () => {
+        expect(mockFetchTrafficData).toHaveBeenCalledTimes(3);
+      });
+
+      it('does not add new results to the existing list', () => {
+        expect(component.state().statuses.length).toBe(10);
+      });
+
+      it('does not add new results to the top of the existing list', () => {
+        expect(component.state().statuses[0].id).toBe(17);
+      });
+
+      it('adds a newStatus=false attribute to each result in the existing list', () => {
+        expect(component.state().statuses[0].newStatus).toBe(false);
       });
     });
   });
