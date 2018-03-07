@@ -12,6 +12,7 @@ class StatusCard extends Component {
     super(props);
 
     this.state = {
+      cardColour: 'green',
       formattedTime: '',
     };
   }
@@ -28,6 +29,7 @@ class StatusCard extends Component {
 
   formatTimeFromNow() {
     this.setState({
+      cardColour: this.props.newStatus ? 'red' : 'green',
       // Parsing Twitter date in a format moment can handle without throwing a warning
       formattedTime: moment(this.props.time, jdConfig.momentTwitterDateFormat, 'en').fromNow(),
     });
@@ -35,7 +37,7 @@ class StatusCard extends Component {
 
   render() {
     return (
-      <div className="card jd-card" data-new-status={this.props.newStatus}>
+      <div className={`card ${this.state.cardColour} jd-card`}>
         <div className="content">
           <img
             className="right floated mini ui image"
