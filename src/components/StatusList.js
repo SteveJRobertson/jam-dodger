@@ -19,6 +19,25 @@ class StatusList extends Component {
     });
   }
 
+  static addNewStatusFlags(statuses, lastId) {
+    if (lastId) {
+      return statuses.map(status => ({
+        ...status,
+        newStatus: true,
+      }));
+    }
+
+    return statuses;
+  }
+
+  static removeNewStatusFlags(statuses) {
+    return statuses.map((status) => {
+      const currentStatus = { ...status };
+      currentStatus.newStatus = false;
+      return currentStatus;
+    });
+  }
+
   constructor(props) {
     super(props);
 
@@ -47,20 +66,15 @@ class StatusList extends Component {
         jdConfig.timeLimit.value,
         jdConfig.timeLimit.units,
       ))
-      .then((statuses) => {
-        if (lastId) {
-          return statuses.map(status => ({
-            newStatus: true,
-            ...status,
-          }));
-        }
-
-        return statuses;
-      })
+      .then(statuses => StatusList.addNewStatusFlags(statuses, lastId))
       .then((newStatuses) => {
-        this.setState(prevState => ({
-          statuses: _.uniqBy([...newStatuses, ...prevState.statuses], 'id'),
-        }));
+        this.setState((prevState) => {
+          const currentStatuses = StatusList.removeNewStatusFlags(prevState.statuses);
+
+          return {
+            statuses: _.uniqBy([...newStatuses, ...currentStatuses], 'id'),
+          };
+        });
       });
   }
 
@@ -72,7 +86,7 @@ class StatusList extends Component {
         name={status.user.name}
         time={status.created_at}
         description={status.text}
-        data-new-status={status.new}
+        newStatus={status.newStatus}
       />
     ));
 
