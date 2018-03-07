@@ -61,8 +61,9 @@ class StatusList extends Component {
     const lastId = this.state.statuses.length > 0 ? this.state.statuses[0].id : null;
 
     fetchData.traffic(fetch, lastId)
-      .then(result => StatusList.limitResultsByTime(
-        result.statuses,
+      .then(result => result.statuses.sort((a, b) => +b.id - +a.id))
+      .then(statuses => StatusList.limitResultsByTime(
+        statuses,
         jdConfig.timeLimit.value,
         jdConfig.timeLimit.units,
       ))
