@@ -2,6 +2,7 @@ import React from 'react';
 import fetch from 'isomorphic-fetch';
 import { mount } from 'enzyme';
 import MockDate from 'mockdate';
+import jdConfig from '../jamdodger.config';
 import StatusList from './StatusList';
 
 import fetchData from '../api/fetchData';
@@ -21,11 +22,11 @@ describe('StatusList component', () => {
     let mockFetchTrafficData;
 
     const twitterData = [
+      { created_at: 'Wed Feb 28 19:26:26 +0000 2018', id: 13, text: '', user: { profile_image_url: '', name: '' } },
+      { created_at: 'Wed Feb 28 19:23:40 +0000 2018', id: 11, text: '', user: { profile_image_url: '', name: '' } },
+      { created_at: 'Wed Feb 28 19:23:51 +0000 2018', id: 12, text: '', user: { profile_image_url: '', name: '' } },
       { created_at: 'Wed Feb 28 19:38:13 +0000 2018', id: 15, text: '', user: { profile_image_url: '', name: '' } },
       { created_at: 'Wed Feb 28 19:33:13 +0000 2018', id: 14, text: '', user: { profile_image_url: '', name: '' } },
-      { created_at: 'Wed Feb 28 19:26:26 +0000 2018', id: 13, text: '', user: { profile_image_url: '', name: '' } },
-      { created_at: 'Wed Feb 28 19:23:51 +0000 2018', id: 12, text: '', user: { profile_image_url: '', name: '' } },
-      { created_at: 'Wed Feb 28 19:23:40 +0000 2018', id: 11, text: '', user: { profile_image_url: '', name: '' } },
       { created_at: 'Wed Feb 28 18:19:16 +0000 2018', id: 10, text: '', user: { profile_image_url: '', name: '' } },
       { created_at: 'Wed Feb 28 18:16:55 +0000 2018', id: 9, text: '', user: { profile_image_url: '', name: '' } },
       { created_at: 'Wed Feb 28 18:15:38 +0000 2018', id: 8, text: '', user: { profile_image_url: '', name: '' } },
@@ -97,7 +98,7 @@ describe('StatusList component', () => {
 
     describe('subsequent fetch with new data', () => {
       beforeAll(() => {
-        jest.runTimersToTime(60000);
+        jest.runTimersToTime(jdConfig.refreshRate);
       });
 
       it('fetches more traffic data from the api', () => {
@@ -121,7 +122,7 @@ describe('StatusList component', () => {
 
     describe('subsequent fetch with no new data', () => {
       beforeAll(() => {
-        jest.runTimersToTime(60000);
+        jest.runTimersToTime(jdConfig.refreshRate);
       });
 
       it('fetches more traffic data from the api', () => {

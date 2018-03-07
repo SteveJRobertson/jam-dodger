@@ -1,3 +1,5 @@
+import jdConfig from '../jamdodger.config';
+
 const fetchData = {
   fromApi(fetch, url) {
     return fetch(url)
@@ -10,7 +12,7 @@ const fetchData = {
   },
 
   traffic(fetch, lastId) {
-    let queryString = '%23edintravel%20-RT&result_type=recent';
+    let queryString = jdConfig.twitterSearchParams;
 
     if (lastId) {
       queryString += `&since_id=${lastId + 1}`;
@@ -20,4 +22,4 @@ const fetchData = {
   },
 };
 
-module.exports = fetchData;
+export default fetchData;
