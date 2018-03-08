@@ -86,7 +86,7 @@ class StatusList extends Component {
         avatarUrl={status.user.profile_image_url}
         name={status.user.name}
         time={status.created_at}
-        description={status.text}
+        description={status.full_text}
         newStatus={status.newStatus}
       />
     ));
