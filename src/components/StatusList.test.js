@@ -21,6 +21,8 @@ describe('StatusList component', () => {
   describe('fetch data from the api', () => {
     let mockFetchTrafficData;
 
+    // Data is deliberately set with the IDs out of order as Twitter sometimes returns results in
+    // this way
     const twitterData = [
       { created_at: 'Wed Feb 28 19:26:26 +0000 2018', id: 13, id_str: '14', full_text: '', user: { profile_image_url: '', name: '' } },
       { created_at: 'Wed Feb 28 19:23:40 +0000 2018', id: 11, id_str: '12', full_text: '', user: { profile_image_url: '', name: '' } },
@@ -39,7 +41,10 @@ describe('StatusList component', () => {
       { created_at: 'Wed Feb 28 16:07:58 +0000 2018', id: 1, id_str: '2', full_text: '', user: { profile_image_url: '', name: '' } },
     ];
 
+    // Status with ID of 15 is included from the previous search as Twitter will sometimes return an
+    // existing status, even with since_id set in the paramters of the API call
     const moreTwitterData = [
+      { created_at: 'Wed Feb 28 19:38:13 +0000 2018', id: 15, id_str: '16', full_text: '', user: { profile_image_url: '', name: '' } },
       { created_at: 'Wed Feb 28 19:48:52 +0000 2018', id: 17, id_str: '18', full_text: '', user: { profile_image_url: '', name: '' } },
       { created_at: 'Wed Feb 28 19:42:25 +0000 2018', id: 16, id_str: '17', full_text: '', user: { profile_image_url: '', name: '' } },
     ];
