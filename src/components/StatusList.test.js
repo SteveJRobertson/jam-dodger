@@ -22,26 +22,26 @@ describe('StatusList component', () => {
     let mockFetchTrafficData;
 
     const twitterData = [
-      { created_at: 'Wed Feb 28 19:26:26 +0000 2018', id: 13, text: '', user: { profile_image_url: '', name: '' } },
-      { created_at: 'Wed Feb 28 19:23:40 +0000 2018', id: 11, text: '', user: { profile_image_url: '', name: '' } },
-      { created_at: 'Wed Feb 28 19:23:51 +0000 2018', id: 12, text: '', user: { profile_image_url: '', name: '' } },
-      { created_at: 'Wed Feb 28 19:38:13 +0000 2018', id: 15, text: '', user: { profile_image_url: '', name: '' } },
-      { created_at: 'Wed Feb 28 19:33:13 +0000 2018', id: 14, text: '', user: { profile_image_url: '', name: '' } },
-      { created_at: 'Wed Feb 28 18:19:16 +0000 2018', id: 10, text: '', user: { profile_image_url: '', name: '' } },
-      { created_at: 'Wed Feb 28 18:16:55 +0000 2018', id: 9, text: '', user: { profile_image_url: '', name: '' } },
-      { created_at: 'Wed Feb 28 18:15:38 +0000 2018', id: 8, text: '', user: { profile_image_url: '', name: '' } },
-      { created_at: 'Wed Feb 28 17:15:34 +0000 2018', id: 7, text: '', user: { profile_image_url: '', name: '' } },
-      { created_at: 'Wed Feb 28 17:13:55 +0000 2018', id: 6, text: '', user: { profile_image_url: '', name: '' } },
-      { created_at: 'Wed Feb 28 17:13:41 +0000 2018', id: 5, text: '', user: { profile_image_url: '', name: '' } },
-      { created_at: 'Wed Feb 28 16:12:24 +0000 2018', id: 4, text: '', user: { profile_image_url: '', name: '' } },
-      { created_at: 'Wed Feb 28 16:11:35 +0000 2018', id: 3, text: '', user: { profile_image_url: '', name: '' } },
-      { created_at: 'Wed Feb 28 16:08:01 +0000 2018', id: 2, text: '', user: { profile_image_url: '', name: '' } },
-      { created_at: 'Wed Feb 28 16:07:58 +0000 2018', id: 1, text: '', user: { profile_image_url: '', name: '' } },
+      { created_at: 'Wed Feb 28 19:26:26 +0000 2018', id: 13, full_text: '', user: { profile_image_url: '', name: '' } },
+      { created_at: 'Wed Feb 28 19:23:40 +0000 2018', id: 11, full_text: '', user: { profile_image_url: '', name: '' } },
+      { created_at: 'Wed Feb 28 19:23:51 +0000 2018', id: 12, full_text: '', user: { profile_image_url: '', name: '' } },
+      { created_at: 'Wed Feb 28 19:38:13 +0000 2018', id: 15, full_text: '', user: { profile_image_url: '', name: '' } },
+      { created_at: 'Wed Feb 28 19:33:13 +0000 2018', id: 14, full_text: '', user: { profile_image_url: '', name: '' } },
+      { created_at: 'Wed Feb 28 18:19:16 +0000 2018', id: 10, full_text: '', user: { profile_image_url: '', name: '' } },
+      { created_at: 'Wed Feb 28 18:16:55 +0000 2018', id: 9, full_text: '', user: { profile_image_url: '', name: '' } },
+      { created_at: 'Wed Feb 28 18:15:38 +0000 2018', id: 8, full_text: '', user: { profile_image_url: '', name: '' } },
+      { created_at: 'Wed Feb 28 17:15:34 +0000 2018', id: 7, full_text: '', user: { profile_image_url: '', name: '' } },
+      { created_at: 'Wed Feb 28 17:13:55 +0000 2018', id: 6, full_text: '', user: { profile_image_url: '', name: '' } },
+      { created_at: 'Wed Feb 28 17:13:41 +0000 2018', id: 5, full_text: '', user: { profile_image_url: '', name: '' } },
+      { created_at: 'Wed Feb 28 16:12:24 +0000 2018', id: 4, full_text: '', user: { profile_image_url: '', name: '' } },
+      { created_at: 'Wed Feb 28 16:11:35 +0000 2018', id: 3, full_text: '', user: { profile_image_url: '', name: '' } },
+      { created_at: 'Wed Feb 28 16:08:01 +0000 2018', id: 2, full_text: '', user: { profile_image_url: '', name: '' } },
+      { created_at: 'Wed Feb 28 16:07:58 +0000 2018', id: 1, full_text: '', user: { profile_image_url: '', name: '' } },
     ];
 
     const moreTwitterData = [
-      { created_at: 'Wed Feb 28 19:48:52 +0000 2018', id: 17, text: '', user: { profile_image_url: '', name: '' } },
-      { created_at: 'Wed Feb 28 19:42:25 +0000 2018', id: 16, text: '', user: { profile_image_url: '', name: '' } },
+      { created_at: 'Wed Feb 28 19:48:52 +0000 2018', id: 17, full_text: '', user: { profile_image_url: '', name: '' } },
+      { created_at: 'Wed Feb 28 19:42:25 +0000 2018', id: 16, full_text: '', user: { profile_image_url: '', name: '' } },
     ];
 
     beforeAll(() => {
@@ -76,14 +76,14 @@ describe('StatusList component', () => {
 
       it('returns the data', () => {
         expect(component.state().statuses).toEqual([
-          { created_at: 'Wed Feb 28 19:38:13 +0000 2018', id: 15, text: '', user: { profile_image_url: '', name: '' } },
-          { created_at: 'Wed Feb 28 19:33:13 +0000 2018', id: 14, text: '', user: { profile_image_url: '', name: '' } },
-          { created_at: 'Wed Feb 28 19:26:26 +0000 2018', id: 13, text: '', user: { profile_image_url: '', name: '' } },
-          { created_at: 'Wed Feb 28 19:23:51 +0000 2018', id: 12, text: '', user: { profile_image_url: '', name: '' } },
-          { created_at: 'Wed Feb 28 19:23:40 +0000 2018', id: 11, text: '', user: { profile_image_url: '', name: '' } },
-          { created_at: 'Wed Feb 28 18:19:16 +0000 2018', id: 10, text: '', user: { profile_image_url: '', name: '' } },
-          { created_at: 'Wed Feb 28 18:16:55 +0000 2018', id: 9, text: '', user: { profile_image_url: '', name: '' } },
-          { created_at: 'Wed Feb 28 18:15:38 +0000 2018', id: 8, text: '', user: { profile_image_url: '', name: '' } },
+          { created_at: 'Wed Feb 28 19:38:13 +0000 2018', id: 15, full_text: '', user: { profile_image_url: '', name: '' } },
+          { created_at: 'Wed Feb 28 19:33:13 +0000 2018', id: 14, full_text: '', user: { profile_image_url: '', name: '' } },
+          { created_at: 'Wed Feb 28 19:26:26 +0000 2018', id: 13, full_text: '', user: { profile_image_url: '', name: '' } },
+          { created_at: 'Wed Feb 28 19:23:51 +0000 2018', id: 12, full_text: '', user: { profile_image_url: '', name: '' } },
+          { created_at: 'Wed Feb 28 19:23:40 +0000 2018', id: 11, full_text: '', user: { profile_image_url: '', name: '' } },
+          { created_at: 'Wed Feb 28 18:19:16 +0000 2018', id: 10, full_text: '', user: { profile_image_url: '', name: '' } },
+          { created_at: 'Wed Feb 28 18:16:55 +0000 2018', id: 9, full_text: '', user: { profile_image_url: '', name: '' } },
+          { created_at: 'Wed Feb 28 18:15:38 +0000 2018', id: 8, full_text: '', user: { profile_image_url: '', name: '' } },
         ]);
       });
 
