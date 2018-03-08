@@ -61,17 +61,25 @@ class StatusList extends Component {
     const lastId = this.state.statuses.length > 0 ? this.state.statuses[0].id_str : null;
 
     fetchData.traffic(fetch, lastId)
-      .then(result => result.statuses.sort((a, b) => +b.id - +a.id))
+      // Remove any statuses which have already been returned
+      .then(result => result.statuses
+        .filter(status => _.find(this.state.statuses, status) === undefined))
+      // Sort the statuses by ID in reverse order (highest number first)
+      .then(statuses => statuses.sort((a, b) => +b.id - +a.id))
+      // Remove any statuses older than the specified time limit
       .then(statuses => StatusList.limitResultsByTime(
         statuses,
         jdConfig.timeLimit.value,
         jdConfig.timeLimit.units,
       ))
+      // Add a 'newStatus' flag to each new status after the inital load
       .then(statuses => StatusList.addNewStatusFlags(statuses, lastId))
       .then((newStatuses) => {
         this.setState((prevState) => {
+          // Remove the 'newStatus' flag from the results which have already been returned
           const currentStatuses = StatusList.removeNewStatusFlags(prevState.statuses);
 
+          // Merge the new statuses with the existing ones
           return {
             statuses: _.uniqBy([...newStatuses, ...currentStatuses], 'id'),
           };
