@@ -1,3 +1,4 @@
+import jdConfig from '../jamdodger.config';
 import fetchData from './fetchData';
 
 let isMockFetchCalled;
@@ -56,7 +57,7 @@ describe('fetchData.traffic', () => {
     it('calls fetchData.fromTwitter with the correct parameters', () => {
       expect(mockFromTwitterMethod).toHaveBeenCalledWith(
         mockFetch,
-        '%23edintravel%20-RT&result_type=recent',
+        jdConfig.twitterSearchParams,
       );
     });
   });
@@ -69,7 +70,7 @@ describe('fetchData.traffic', () => {
     it('calls fetchData.fromTwitter for more results', () => {
       expect(mockFromTwitterMethod).toHaveBeenCalledWith(
         mockFetch,
-        '%23edintravel%20-RT&result_type=recent&since_id=15',
+        `${jdConfig.twitterSearchParams}&since_id=16`,
       );
     });
   });

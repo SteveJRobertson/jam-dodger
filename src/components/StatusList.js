@@ -19,6 +19,25 @@ class StatusList extends Component {
     });
   }
 
+  static addNewStatusFlags(statuses, lastId) {
+    if (lastId) {
+      return statuses.map(status => ({
+        ...status,
+        newStatus: true,
+      }));
+    }
+
+    return statuses;
+  }
+
+  static removeNewStatusFlags(statuses) {
+    return statuses.map((status) => {
+      const currentStatus = { ...status };
+      currentStatus.newStatus = false;
+      return currentStatus;
+    });
+  }
+
   constructor(props) {
     super(props);
 
@@ -29,7 +48,7 @@ class StatusList extends Component {
 
   componentDidMount() {
     this.fetchTrafficData();
-    this.loadInterval = setInterval(() => this.fetchMoreTrafficData(), jdConfig.refreshRate);
+    this.loadInterval = setInterval(() => this.fetchTrafficData(), jdConfig.refreshRate);
   }
 
   componentWillUnmount() {
@@ -38,31 +57,23 @@ class StatusList extends Component {
   }
 
   fetchTrafficData() {
-    fetchData.traffic(fetch)
-      .then((result) => {
-        this.setState({
-          statuses: StatusList.limitResultsByTime(
-            result.statuses,
-            jdConfig.timeLimit.value,
-            jdConfig.timeLimit.units,
-          ),
-        });
-      });
-  }
+    // Get the most recent status ID from the list (i.e. the first one). If none, set to null.
+    const lastId = this.state.statuses.length > 0 ? this.state.statuses[0].id : null;
 
-  fetchMoreTrafficData() {
-    const lastId = this.state.statuses[0].id;
     fetchData.traffic(fetch, lastId)
-      .then((result) => {
+      .then(result => result.statuses.sort((a, b) => +b.id - +a.id))
+      .then(statuses => StatusList.limitResultsByTime(
+        statuses,
+        jdConfig.timeLimit.value,
+        jdConfig.timeLimit.units,
+      ))
+      .then(statuses => StatusList.addNewStatusFlags(statuses, lastId))
+      .then((newStatuses) => {
         this.setState((prevState) => {
-          const newStatusList = _.uniqBy(result.statuses.concat(prevState.statuses), 'id');
+          const currentStatuses = StatusList.removeNewStatusFlags(prevState.statuses);
 
           return {
-            statuses: StatusList.limitResultsByTime(
-              newStatusList,
-              jdConfig.timeLimit.value,
-              jdConfig.timeLimit.units,
-            ),
+            statuses: _.uniqBy([...newStatuses, ...currentStatuses], 'id'),
           };
         });
       });
@@ -75,7 +86,8 @@ class StatusList extends Component {
         avatarUrl={status.user.profile_image_url}
         name={status.user.name}
         time={status.created_at}
-        description={status.text}
+        description={status.full_text}
+        newStatus={status.newStatus}
       />
     ));
 

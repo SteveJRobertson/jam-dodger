@@ -5,4 +5,5 @@ module.exports = {
     units: 'hours',
     value: 2,
   },
+  twitterSearchParams: '%23edintravel%20-RT&result_type=recent&tweet_mode=extended',
 };
