@@ -15,7 +15,7 @@ const fetchData = {
     let queryString = jdConfig.twitterSearchParams;
 
     if (lastId) {
-      queryString += `&since_id=${lastId + 1}`;
+      queryString += `&since_id=${lastId}`;
     }
 
     return this.fromTwitter(fetch, queryString);
