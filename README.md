@@ -1,11 +1,10 @@
-[![GitHub version](https://badge.fury.io/gh/SteveJRobertson%2Fjam-dodger.svg)](https://badge.fury.io/gh/SteveJRobertson%2Fjam-dodger) ![Dependencies](https://david-dm.org/SteveJRobertson/jam-dodger.svg) ![DevDependencies](https://david-dm.org/SteveJRobertson/jam-dodger/dev-status.svg) [![CircleCI](https://circleci.com/gh/SteveJRobertson/jam-dodger.svg?style=shield&circle-token=851e977db0692dbefa8d02e324c02c85a0d8618b)](https://circleci.com/gh/SteveJRobertson/jam-dodger) [![Maintainability](https://api.codeclimate.com/v1/badges/2e894dc23919978c2424/maintainability)](https://codeclimate.com/github/SteveJRobertson/jam-dodger/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/2e894dc23919978c2424/test_coverage)](https://codeclimate.com/github/SteveJRobertson/jam-dodger/test_coverage)
-
 # JamDodger
+
+[![GitHub version](https://badge.fury.io/gh/SteveJRobertson%2Fjam-dodger.svg)](https://badge.fury.io/gh/SteveJRobertson%2Fjam-dodger) ![Dependencies](https://david-dm.org/SteveJRobertson/jam-dodger.svg) ![DevDependencies](https://david-dm.org/SteveJRobertson/jam-dodger/dev-status.svg) [![CircleCI](https://circleci.com/gh/SteveJRobertson/jam-dodger.svg?style=shield&circle-token=851e977db0692dbefa8d02e324c02c85a0d8618b)](https://circleci.com/gh/SteveJRobertson/jam-dodger) [![Maintainability](https://api.codeclimate.com/v1/badges/2e894dc23919978c2424/maintainability)](https://codeclimate.com/github/SteveJRobertson/jam-dodger/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/2e894dc23919978c2424/test_coverage)](https://codeclimate.com/github/SteveJRobertson/jam-dodger/test_coverage)
 
 A Twitter-based traffic news app, bringing the latest updates to your phone and reading them aloud as you drive.
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app). You can find out more about Create React App by reading the [documentation](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
-
 
 ## Installation
 
@@ -38,4 +37,3 @@ Integration tests have been written using [Cypress.io](https://www.cypress.io/).
 ## Deploying to GitHub Pages
 
 The app can be deployed to GitHub pages. Firstly update the `homepage` property in `package.json` to point to your own GH pages location then run `npm run deploy` to create a production build and deploy it.
-
