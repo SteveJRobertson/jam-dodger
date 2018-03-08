@@ -58,7 +58,7 @@ class StatusList extends Component {
 
   fetchTrafficData() {
     // Get the most recent status ID from the list (i.e. the first one). If none, set to null.
-    const lastId = this.state.statuses.length > 0 ? this.state.statuses[0].id : null;
+    const lastId = this.state.statuses.length > 0 ? this.state.statuses[0].id_str : null;
 
     fetchData.traffic(fetch, lastId)
       .then(result => result.statuses.sort((a, b) => +b.id - +a.id))
