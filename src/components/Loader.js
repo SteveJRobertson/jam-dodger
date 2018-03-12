@@ -6,23 +6,25 @@ import PropTypes from 'prop-types';
  */
 class Loader extends Component {
   loaderClasses() {
+    const activeClass = !this.props.hasLoaded ? 'active ' : '';
     const sizeClass = this.props.size !== null ? `${this.props.size} ` : '';
     const textClass = this.props.text !== null ? 'text ' : '';
-    return `ui active centered inline ${sizeClass}${textClass}loader`;
+    return `ui ${activeClass}centered inline ${sizeClass}${textClass}loader`;
   }
 
   render() {
-    console.log(this.loaderClasses());
     return <div className={this.loaderClasses()}>{this.props.text}</div>;
   }
 }
 
 Loader.defaultProps = {
+  hasLoaded: false,
   size: 'massive',
   text: null,
 };
 
 Loader.propTypes = {
+  hasLoaded: PropTypes.bool,
   size: PropTypes.string,
   text: PropTypes.string,
 };
