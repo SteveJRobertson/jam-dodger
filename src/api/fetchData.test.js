@@ -70,7 +70,7 @@ describe('fetchData.traffic', () => {
     it('calls fetchData.fromTwitter for more results', () => {
       expect(mockFromTwitterMethod).toHaveBeenCalledWith(
         mockFetch,
-        `${jdConfig.twitterSearchParams}&since_id=16`,
+        `${jdConfig.twitterSearchParams}&since_id=15`,
       );
     });
   });
