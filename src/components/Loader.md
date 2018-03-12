@@ -3,7 +3,9 @@
 #### Default
 
 ```js
-<Loader />
+<div className="ui segment">
+  <Loader />
+</div>
 ```
 
 #### Examples with props
@@ -14,43 +16,55 @@ class is 'massive'. Text is optional.
 ---
 
 ```js
-<Loader
-  size={'mini'}
-  text={'Mini loader'}
-/>
+<div className="ui segment">
+  <Loader
+    size={'mini'}
+    text={'Mini loader'}
+  />
+</div>
 ```
 
 ```js
-<Loader
-  size={'tiny'}
-  text={'Tiny loader'}
-/>
+<div className="ui segment">
+  <Loader
+    size={'tiny'}
+    text={'Tiny loader'}
+  />
+</div>
 ```
 
 ```js
-<Loader
-  size={'small'}
-  text={'Small loader'}
-/>
+<div className="ui segment">
+  <Loader
+    size={'small'}
+    text={'Small loader'}
+  />
+</div>
 ```
 
 ```js
-<Loader
-  size={'medium'}
-  text={'Medium loader'}
-/>
+<div className="ui segment">
+  <Loader
+    size={'medium'}
+    text={'Medium loader'}
+  />
+</div>
 ```
 
 ```js
-<Loader
-  size={'large'}
-  text={'Large loader'}
-/>
+<div className="ui segment">
+  <Loader
+    size={'large'}
+    text={'Large loader'}
+  />
+</div>
 ```
 
 ```js
-<Loader
-  size={'massive'}
-  text={'Massive loader'}
-/>
+<div className="ui segment">
+  <Loader
+    size={'massive'}
+    text={'Massive loader'}
+  />
+</div>
 ```
