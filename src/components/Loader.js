@@ -5,15 +5,23 @@ import PropTypes from 'prop-types';
  * The loading spinner used when the app is initially loaded.
  */
 class Loader extends Component {
-  loaderClasses() {
+  dimmerClasses() {
     const activeClass = !this.props.hasLoaded ? 'active ' : '';
+    return `ui ${activeClass}inverted dimmer`;
+  }
+
+  loaderClasses() {
     const sizeClass = this.props.size !== null ? `${this.props.size} ` : '';
     const textClass = this.props.text !== null ? 'text ' : '';
-    return `ui ${activeClass}centered inline ${sizeClass}${textClass}loader`;
+    return `ui ${sizeClass}${textClass}loader`;
   }
 
   render() {
-    return <div className={this.loaderClasses()}>{this.props.text}</div>;
+    return (
+      <div className={this.dimmerClasses()}>
+        <div className={this.loaderClasses()}>{this.props.text}</div>
+      </div>
+    );
   }
 }
 
