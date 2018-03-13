@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import LoadingSpinner from './LoadingSpinner';
 
 /**
- * The loading spinner used when the app is initially loaded.
+ * The containing dimmer wrapper for a loading spinner.
  */
 class Loader extends Component {
   dimmerClasses() {
@@ -10,16 +11,14 @@ class Loader extends Component {
     return `ui ${activeClass}inverted dimmer`;
   }
 
-  loaderClasses() {
-    const sizeClass = this.props.size;
-    const textClass = this.props.text !== null ? 'text ' : '';
-    return `ui ${sizeClass}${textClass}loader`;
-  }
-
   render() {
     return (
       <div className={this.dimmerClasses()}>
-        <div className={this.loaderClasses()}>{this.props.text}</div>
+        <LoadingSpinner
+          hasLoaded={!this.props.hasLoaded}
+          size={this.props.size}
+          text={this.props.text}
+        />
       </div>
     );
   }
