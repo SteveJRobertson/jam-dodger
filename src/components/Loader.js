@@ -11,7 +11,7 @@ class Loader extends Component {
   }
 
   loaderClasses() {
-    const sizeClass = this.props.size !== null ? `${this.props.size} ` : '';
+    const sizeClass = this.props.size;
     const textClass = this.props.text !== null ? 'text ' : '';
     return `ui ${sizeClass}${textClass}loader`;
   }
