@@ -7,6 +7,7 @@ import jdConfig from './jamdodger.config';
 import Header from './components/Header';
 import Loader from './components/Loader';
 import StatusList from './components/StatusList';
+import NoResults from './components/NoResults';
 import fetchData from './api/fetchData';
 import './App.css';
 
@@ -44,6 +45,7 @@ class App extends Component {
 
     this.state = {
       hasLoaded: false,
+      statusCount: 0,
       statuses: [],
     };
   }
@@ -80,11 +82,13 @@ class App extends Component {
         this.setState((prevState) => {
           // Remove the 'newStatus' flag from the results which have already been returned
           const currentStatuses = App.removeNewStatusFlags(prevState.statuses);
+          const statusList = _.uniqBy([...newStatuses, ...currentStatuses], 'id');
 
           // Merge the new statuses with the existing ones
           return {
             hasLoaded: true,
-            statuses: _.uniqBy([...newStatuses, ...currentStatuses], 'id'),
+            statusCount: statusList.length,
+            statuses: statusList,
           };
         });
       });
@@ -96,6 +100,7 @@ class App extends Component {
         <Header title={this.props.appTitle} />
         <Loader hasLoaded={this.state.hasLoaded} />
         <StatusList statuses={this.state.statuses} />
+        <NoResults hasLoaded={this.state.hasLoaded} statusCount={this.state.statusCount} />
       </div>
     );
   }

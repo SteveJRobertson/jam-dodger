@@ -1,0 +1,12 @@
+.jd-no-results {
+  display: none !important;
+
+  &.has-loaded.has-no-results {
+    display: block !important;
+  }
+
+  > .jd-no-results-txt {
+    margin: 2em 0;
+    text-align: center;
+  }
+}
