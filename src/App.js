@@ -47,6 +47,7 @@ class App extends Component {
       hasLoaded: false,
       statusCount: 0,
       statuses: [],
+      timeSinceLastApiCall: jdConfig.refreshRate / jdConfig.countdownRate,
     };
   }
 
@@ -57,7 +58,23 @@ class App extends Component {
 
   componentWillUnmount() {
     clearInterval(this.loadInterval);
-    this.loadInterval = false;
+  }
+
+  startCountdown() {
+    const countdownInterval = setInterval(() => {
+      let counter = this.state.timeSinceLastApiCall;
+
+      if (counter > 0) {
+        counter -= 1;
+      } else {
+        counter = jdConfig.refreshRate / jdConfig.countdownRate;
+        clearInterval(countdownInterval);
+      }
+
+      this.setState({
+        timeSinceLastApiCall: counter,
+      });
+    }, jdConfig.countdownRate);
   }
 
   fetchTrafficData() {
@@ -79,6 +96,7 @@ class App extends Component {
       // Add a 'newStatus' flag to each new status after the inital load
       .then(statuses => App.addNewStatusFlags(statuses, lastId))
       .then((newStatuses) => {
+        this.startCountdown();
         this.setState((prevState) => {
           // Remove the 'newStatus' flag from the results which have already been returned
           const currentStatuses = App.removeNewStatusFlags(prevState.statuses);
@@ -97,7 +115,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header title={this.props.appTitle} />
+        <Header title={this.props.appTitle} elapsed={this.state.timeSinceLastApiCall} />
         <Loader hasLoaded={this.state.hasLoaded} />
         <StatusList statuses={this.state.statuses} />
         <NoResults hasLoaded={this.state.hasLoaded} statusCount={this.state.statusCount} />

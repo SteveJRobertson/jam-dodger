@@ -1,0 +1,12 @@
+.ui.progress.jd-progress {
+  background: #1b1c1d;
+  border-radius: 0;
+  z-index: 1001;
+
+  > .bar {
+    background-color: #db2828;
+    border-radius: 0;
+    min-width: 0;
+    transition: none;
+  }
+}

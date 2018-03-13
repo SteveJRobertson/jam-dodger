@@ -1,6 +1,7 @@
 module.exports = {
   momentTwitterDateFormat: 'dd MMM DD HH:mm:ss ZZ YYYY',
   refreshRate: 60000,
+  countdownRate: 25,
   timeLimit: {
     units: 'hours',
     value: 2,
