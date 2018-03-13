@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import LoadingSpinner from './LoadingSpinner';
 
 /**
- * The containing dimmer wrapper for a loading spinner.
+ * The containing wrapper for a loading spinner.
  */
 class Loader extends Component {
   dimmerClasses() {
