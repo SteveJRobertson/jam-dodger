@@ -1,6 +1,7 @@
 .ui.progress.jd-progress {
   background: #1b1c1d;
   border-radius: 0;
+  margin-top: 0;
   z-index: 1001;
 
   > .bar {
@@ -8,5 +9,14 @@
     border-radius: 0;
     min-width: 0;
     transition: none;
+  }
+}
+
+@keyframes countdown {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
   }
 }

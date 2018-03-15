@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import jdConfig from '../jamdodger.config';
 import './ProgressBar.css';
 
@@ -14,17 +15,28 @@ class ProgressBar extends Component {
   }
 
   componentWillReceiveProps() {
-    this.getProgress();
+    if (this.props.startCountdown) {
+      this.startCountdown();
+    } else {
+      this.stopCountdown();
+    }
   }
 
-  getProgress() {
-    const timeIntervalInSecs = jdConfig.refreshRate / jdConfig.countdownRate;
-    const timeLeft = timeIntervalInSecs - this.props.elapsed;
-    const remainingPercentageString = `${((100 / timeIntervalInSecs) * timeLeft).toString()}%`;
+  startCountdown() {
+    const now = +moment().format('X');
+    const timeToNextInterval = this.props.nextInterval - now;
 
     this.setState({
       styles: {
-        width: remainingPercentageString,
+        animation: `countdown ${timeToNextInterval}s linear infinite`,
+      },
+    });
+  }
+
+  stopCountdown() {
+    this.setState({
+      styles: {
+        animation: 'none',
       },
     });
   }
@@ -39,11 +51,13 @@ class ProgressBar extends Component {
 }
 
 ProgressBar.defaultProps = {
-  elapsed: 0,
+  nextInterval: +moment().add(jdConfig.refreshRate, 'milliseconds').format('X'),
+  startCountdown: false,
 };
 
 ProgressBar.propTypes = {
-  elapsed: PropTypes.number,
+  nextInterval: PropTypes.number,
+  startCountdown: PropTypes.bool,
 };
 
 export default ProgressBar;
