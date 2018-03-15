@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ProgressBar from './ProgressBar';
 import './Header.css';
 
 /**
@@ -11,17 +10,14 @@ const Header = props => (
     <header className="jd-header ui inverted segment">
       <span className="ui white inverted huge header">{props.title}</span>
     </header>
-    <ProgressBar elapsed={props.elapsed} />
   </div>
 );
 
 Header.defaultProps = {
-  elapsed: 0,
   title: 'Header Title',
 };
 
 Header.propTypes = {
-  elapsed: PropTypes.number,
   title: PropTypes.string,
 };
 
