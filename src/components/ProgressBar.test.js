@@ -18,9 +18,12 @@ describe('ProgressBar component', () => {
   describe('component will receive props', () => {
     describe('when countdown is started', () => {
       beforeAll(() => {
-        component = mount(<ProgressBar startCountdown />);
+        component = mount(<ProgressBar />);
         jest.spyOn(component.instance(), 'startCountdown');
-        component.instance().componentWillReceiveProps();
+        component.instance().componentWillReceiveProps({
+          nextInterval: 1234,
+          progressBarStatus: 'running',
+        });
       });
 
       afterAll(() => {
@@ -28,7 +31,7 @@ describe('ProgressBar component', () => {
       });
 
       it('calls startCountdown()', () => {
-        expect(component.instance().startCountdown).toHaveBeenCalledWith();
+        expect(component.instance().startCountdown).toHaveBeenCalledWith(1234);
       });
     });
 
@@ -36,7 +39,9 @@ describe('ProgressBar component', () => {
       beforeAll(() => {
         component = mount(<ProgressBar startCountdown={false} />);
         jest.spyOn(component.instance(), 'stopCountdown');
-        component.instance().componentWillReceiveProps();
+        component.instance().componentWillReceiveProps({
+          progressBarStatus: 'paused',
+        });
       });
 
       afterAll(() => {
@@ -53,8 +58,8 @@ describe('ProgressBar component', () => {
     beforeAll(() => {
       MockDate.set(new Date('2018-03-15 13:40:00'));
       const nextInterval = +moment().add(45, 'seconds').format('X');
-      component = mount(<ProgressBar nextInterval={nextInterval} />);
-      component.instance().startCountdown();
+      component = mount(<ProgressBar />);
+      component.instance().startCountdown(nextInterval);
     });
 
     afterAll(() => {

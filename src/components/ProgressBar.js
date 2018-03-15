@@ -14,17 +14,17 @@ class ProgressBar extends Component {
     this.state = {};
   }
 
-  componentWillReceiveProps() {
-    if (this.props.startCountdown) {
-      this.startCountdown();
-    } else {
+  componentWillReceiveProps(nextProps) {
+    if (nextProps && nextProps.progressBarStatus === 'running') {
+      this.startCountdown(nextProps.nextInterval);
+    } else if (nextProps && nextProps.progressBarStatus === 'paused') {
       this.stopCountdown();
     }
   }
 
-  startCountdown() {
+  startCountdown(nextInterval) {
     const now = +moment().format('X');
-    const timeToNextInterval = this.props.nextInterval - now;
+    const timeToNextInterval = nextInterval - now;
 
     this.setState({
       styles: {
@@ -51,13 +51,13 @@ class ProgressBar extends Component {
 }
 
 ProgressBar.defaultProps = {
+  progressBarStatus: 'paused',
   nextInterval: +moment().add(jdConfig.refreshRate, 'milliseconds').format('X'),
-  startCountdown: false,
 };
 
 ProgressBar.propTypes = {
+  progressBarStatus: PropTypes.string,
   nextInterval: PropTypes.number,
-  startCountdown: PropTypes.bool,
 };
 
 export default ProgressBar;
