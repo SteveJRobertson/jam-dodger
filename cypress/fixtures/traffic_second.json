@@ -1,0 +1,44 @@
+{
+  "statuses": [
+    {
+      "created_at": "Wed Feb 28 19:33:13 +0000 2018",
+      "id": 968932119279005700,
+      "full_text": "RT @edintravel: *IMPORTANT INFO* - @on_lothianbuses service update #edintravel https://t.co/tr0VWW7le6",
+      "user": {
+        "name": "Lauren Byrne",
+        "screen_name": "laurenmarybyrne",
+        "profile_image_url": "http://pbs.twimg.com/profile_images/730200256407863296/BjLOjKhl_normal.jpg"
+      }
+    },
+    {
+      "created_at": "Wed Feb 28 19:26:26 +0000 2018",
+      "id": 968930409278001200,
+      "full_text": "RT @EastCoastBuses: CUSTOMER INFORMATION\nBUS SERVICES THIS EVENING\nPLEASE SHARE\n#eastlothian #travel #edintravel https://t.co/4daRdgCs2e",
+      "user": {
+        "name": "Θ_Θ noɹɪko Θ_Θ",
+        "screen_name": "tenten_n55",
+        "profile_image_url": "http://pbs.twimg.com/profile_images/692482573717602304/p7UjC5sw_normal.jpg"
+      }
+    },
+    {
+      "created_at": "Wed Feb 28 19:23:51 +0000 2018",
+      "id": 968929761492914200,
+      "full_text": "RT @EastCoastBuses: CUSTOMER INFORMATION\nBUS SERVICES THIS EVENING\nPLEASE SHARE\n#eastlothian #travel #edintravel https://t.co/4daRdgCs2e",
+      "user": {
+        "name": "Monika Safian",
+        "screen_name": "MonikaSafian",
+        "profile_image_url": "http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png"
+      }
+    },
+    {
+      "created_at": "Wed Feb 28 19:23:40 +0000 2018",
+      "id": 968929715779141600,
+      "full_text": "RT @EastCoastBuses: CUSTOMER INFORMATION\nBUS SERVICES THIS EVENING\nPLEASE SHARE\n#eastlothian #travel #edintravel https://t.co/4daRdgCs2e",
+      "user": {
+        "name": "Kerry Taylor",
+        "screen_name": "kerryjt17",
+        "profile_image_url": "http://pbs.twimg.com/profile_images/378800000670838280/a3ed180b0221539fe3e965103eaace42_normal.jpeg"
+      }
+    }
+  ]
+}

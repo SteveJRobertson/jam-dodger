@@ -1,37 +1,45 @@
+import helpers from '../helpers';
+
 describe('Card component', () => {
   let card;
   let img;
 
-  before(() => {
-    cy.visit('http://localhost:3000');
-    cy.wait(2000); // Should probably do something better here with cy.wait()
+  beforeEach(function() {
+    cy.clock();
+    cy.visit('http://localhost:3000', {
+      onBeforeLoad (win) {
+        helpers.fakeFetch(win);
+      }
+    });
+
+    helpers.getFakeTrafficData('traffic_first');
 
     card = cy.get('.App')
-      .find('.cards')  
+      .find('.cards')
       .find(':nth-child(1)');
 
     img = card.find('img');
   });
 
-  it('Card image has a src attribute', () => {
+  it('card image has a src attribute', function() {
     img.should('have.attr', 'src');
   });
   
-  it('Card image has an alt attribute', () => {
+  it('card image has an alt attribute', function() {
     img.should('have.attr', 'alt');
   });
 
-  it('Card has a time', () => {
+  it('card has a time', function() {
     card.find('.content > .header')
       .should('have.class', 'jd-time');
   });
 
-  it('Card has a username', () => {
+  it('card has a username', function() {
     card.find('.content > .meta')
       .should('have.class', 'jd-username');
   });
 
-  it('Card has a description', () => {
+  it('card has a description', function() {
     card.find('.content > .description')
       .should('have.class', 'jd-text');
   });
