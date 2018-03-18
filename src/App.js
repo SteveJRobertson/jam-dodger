@@ -127,6 +127,7 @@ class App extends Component {
         <NoResults
           hasLoaded={this.state.hasLoaded}
           statusCount={this.state.statusCount}
+          text={jdConfig.noResultsText}
         />
       </div>
     );

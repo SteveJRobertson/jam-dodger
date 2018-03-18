@@ -14,6 +14,10 @@ class ProgressBar extends Component {
     this.state = {};
   }
 
+  componentWillMount() {
+    this.startCountdown(this.props.nextInterval);
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps && nextProps.progressBarStatus === 'running') {
       this.startCountdown(nextProps.nextInterval);
