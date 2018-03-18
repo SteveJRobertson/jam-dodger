@@ -69,6 +69,28 @@ class App extends Component {
     });
   }
 
+  applyStatusUpdates(newStatuses) {
+    this.setState((prevState) => {
+      // Remove the 'newStatus' flag from the results which have already been returned
+      const currentStatuses = App.removeNewStatusFlags(prevState.statuses);
+      // Merge the new statuses with the existing ones
+      const statusList = _.uniqBy([...newStatuses, ...currentStatuses], 'id');
+      const newState = {
+        hasLoaded: true,
+        progressBarStatus: 'running',
+        statusCount: statusList.length,
+        statuses: statusList,
+      };
+
+      // Update the next fetch call time for all fetches beyond the initial one.
+      if (prevState.hasLoaded) {
+        newState.nextFetchCall = +moment().add(jdConfig.refreshRate, 'milliseconds').format('X');
+      }
+
+      return newState;
+    });
+  }
+
   fetchTrafficData() {
     this.setState({
       progressBarStatus: 'paused',
@@ -92,25 +114,7 @@ class App extends Component {
       // Add a 'newStatus' flag to each new status after the inital load
       .then(statuses => App.addNewStatusFlags(statuses, lastId))
       .then((newStatuses) => {
-        this.setState((prevState) => {
-          // Remove the 'newStatus' flag from the results which have already been returned
-          const currentStatuses = App.removeNewStatusFlags(prevState.statuses);
-          // Merge the new statuses with the existing ones
-          const statusList = _.uniqBy([...newStatuses, ...currentStatuses], 'id');
-          const newState = {
-            hasLoaded: true,
-            progressBarStatus: 'running',
-            statusCount: statusList.length,
-            statuses: statusList,
-          };
-
-          // Update the next fetch call time for all fetches beyond the initial one.
-          if (prevState.hasLoaded) {
-            newState.nextFetchCall = +moment().add(jdConfig.refreshRate, 'milliseconds').format('X');
-          }
-
-          return newState;
-        });
+        this.applyStatusUpdates(newStatuses);
       });
   }
 
