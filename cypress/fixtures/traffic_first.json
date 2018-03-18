@@ -1,0 +1,24 @@
+{
+  "statuses": [
+    {
+      "created_at": "Wed Feb 28 19:38:13 +0000 2018",
+      "id": 968933378153242600,
+      "full_text": "RT @edintravel: Now hearing of a power cut around Blackhall area. Many traffic signals are in darkness - take extra care! #edintravel",
+      "user": {
+        "name": "Kathleen Ann McAdams",
+        "screen_name": "albany_hr",
+        "profile_image_url": "http://pbs.twimg.com/profile_images/959027366927400960/at_o2xuF_normal.jpg"
+      }
+    },
+    {
+      "created_at": "Wed Feb 28 19:33:13 +0000 2018",
+      "id": 968932119279005700,
+      "full_text": "RT @edintravel: *IMPORTANT INFO* - @on_lothianbuses service update #edintravel https://t.co/tr0VWW7le6",
+      "user": {
+        "name": "Lauren Byrne",
+        "screen_name": "laurenmarybyrne",
+        "profile_image_url": "http://pbs.twimg.com/profile_images/730200256407863296/BjLOjKhl_normal.jpg"
+      }
+    }
+  ]
+}

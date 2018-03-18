@@ -6,9 +6,11 @@ import './Header.css';
  * The header component banner used at the top of the application.
  */
 const Header = props => (
-  <header className="jd-header ui inverted segment">
-    <span className="ui white inverted huge header">{props.title}</span>
-  </header>
+  <div>
+    <header className="jd-header ui inverted segment">
+      <span className="ui white inverted huge header">{props.title}</span>
+    </header>
+  </div>
 );
 
 Header.defaultProps = {
