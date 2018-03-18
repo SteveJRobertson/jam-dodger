@@ -20,8 +20,6 @@ module.exports = {
     let delay = params.delay || 0;
     let mock = params.mock || null;
 
-    console.log('params', params);
-
     cy.fixture(fixture).then((trafficData) => {
       const processTrafficData = () => {
         if (mock && call) {
