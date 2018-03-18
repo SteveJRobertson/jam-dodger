@@ -5,6 +5,7 @@ import _ from 'lodash';
 import moment from 'moment';
 import jdConfig from './jamdodger.config';
 import Header from './components/Header';
+import ProgressBar from './components/ProgressBar';
 import Loader from './components/Loader';
 import StatusList from './components/StatusList';
 import NoResults from './components/NoResults';
@@ -45,22 +46,34 @@ class App extends Component {
 
     this.state = {
       hasLoaded: false,
+      nextFetchCall: null,
+      progressBarStatus: 'paused',
       statusCount: 0,
       statuses: [],
     };
   }
 
   componentDidMount() {
+    this.getTimeOfNextFetch();
     this.fetchTrafficData();
     this.loadInterval = setInterval(() => this.fetchTrafficData(), jdConfig.refreshRate);
   }
 
   componentWillUnmount() {
     clearInterval(this.loadInterval);
-    this.loadInterval = false;
+  }
+
+  getTimeOfNextFetch() {
+    this.setState({
+      nextFetchCall: +moment().add(jdConfig.refreshRate, 'milliseconds').format('X'),
+    });
   }
 
   fetchTrafficData() {
+    this.setState({
+      progressBarStatus: 'paused',
+    });
+
     // Get the most recent status ID from the list (i.e. the first one). If none, set to null.
     const lastId = this.state.statuses.length > 0 ? this.state.statuses[0].id_str : null;
 
@@ -82,14 +95,21 @@ class App extends Component {
         this.setState((prevState) => {
           // Remove the 'newStatus' flag from the results which have already been returned
           const currentStatuses = App.removeNewStatusFlags(prevState.statuses);
-          const statusList = _.uniqBy([...newStatuses, ...currentStatuses], 'id');
-
           // Merge the new statuses with the existing ones
-          return {
+          const statusList = _.uniqBy([...newStatuses, ...currentStatuses], 'id');
+          const newState = {
             hasLoaded: true,
+            progressBarStatus: 'running',
             statusCount: statusList.length,
             statuses: statusList,
           };
+
+          // Update the next fetch call time for all fetches beyond the initial one.
+          if (prevState.hasLoaded) {
+            newState.nextFetchCall = +moment().add(jdConfig.refreshRate, 'milliseconds').format('X');
+          }
+
+          return newState;
         });
       });
   }
@@ -98,9 +118,17 @@ class App extends Component {
     return (
       <div className="App">
         <Header title={this.props.appTitle} />
+        <ProgressBar
+          nextInterval={this.state.nextFetchCall}
+          progressBarStatus={this.state.progressBarStatus}
+        />
         <Loader hasLoaded={this.state.hasLoaded} />
         <StatusList statuses={this.state.statuses} />
-        <NoResults hasLoaded={this.state.hasLoaded} statusCount={this.state.statusCount} />
+        <NoResults
+          hasLoaded={this.state.hasLoaded}
+          statusCount={this.state.statusCount}
+          text={jdConfig.noResultsText}
+        />
       </div>
     );
   }
