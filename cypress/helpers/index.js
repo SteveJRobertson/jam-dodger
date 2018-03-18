@@ -15,37 +15,40 @@ module.exports = {
       .returns(this.fetchTrafficDataDeferred.promise);
   },
   getFakeTrafficData: function(fixture, testParams) {
-    let params = testParams || {};
+    let params = testParams || {
+      call: 0,
+      delay: 0,
+      mock: null,
+    };
     let call = params.call || 0;
     let delay = params.delay || 0;
     let mock = params.mock || null;
 
     cy.fixture(fixture).then((trafficData) => {
-      const processTrafficData = () => {
-        if (mock && call) {
-          mock.onCall(call).resolves({
-            json() {
-              return trafficData;
-            },
-            ok: true,
-          });
-        } else {
-          this.fetchTrafficDataDeferred.resolve({
-            json() {
-              return trafficData;
-            },
-            ok: true,
-          });
-        }
-      }
-
       if( delay) {
         setTimeout(() => {
-          processTrafficData();
+          this.processTrafficData(trafficData, mock, call);
         }, delay);
       } else {
-        processTrafficData();
+        this.processTrafficData(trafficData, mock, call);
       }
     });
+  },
+  processTrafficData: function(trafficData, mock, call) {
+    if (mock && call) {
+      mock.onCall(call).resolves({
+        json() {
+          return trafficData;
+        },
+        ok: true,
+      });
+    } else {
+      this.fetchTrafficDataDeferred.resolve({
+        json() {
+          return trafficData;
+        },
+        ok: true,
+      });
+    }
   }
 };
