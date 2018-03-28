@@ -9,6 +9,7 @@ import ProgressBar from './components/ProgressBar';
 import Loader from './components/Loader';
 import StatusList from './components/StatusList';
 import NoResults from './components/NoResults';
+import AudioControlPanel from './components/AudioControlPanel';
 import fetchData from './api/fetchData';
 import './App.css';
 
@@ -121,18 +122,21 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header title={this.props.appTitle} />
-        <ProgressBar
-          nextInterval={this.state.nextFetchCall}
-          progressBarStatus={this.state.progressBarStatus}
-        />
-        <Loader hasLoaded={this.state.hasLoaded} />
-        <StatusList statuses={this.state.statuses} />
-        <NoResults
-          hasLoaded={this.state.hasLoaded}
-          statusCount={this.state.statusCount}
-          text={jdConfig.noResultsText}
-        />
+        <div className="jd-app-wrapper">
+          <Header title={this.props.appTitle} />
+          <ProgressBar
+            nextInterval={this.state.nextFetchCall}
+            progressBarStatus={this.state.progressBarStatus}
+          />
+          <Loader hasLoaded={this.state.hasLoaded} />
+          <StatusList statuses={this.state.statuses} />
+          <NoResults
+            hasLoaded={this.state.hasLoaded}
+            statusCount={this.state.statusCount}
+            text={jdConfig.noResultsText}
+          />
+        </div>
+        <AudioControlPanel />
       </div>
     );
   }
