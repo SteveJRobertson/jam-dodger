@@ -1,3 +1,14 @@
 .App {
   min-height: 100vh;
+
+  .jd-app-wrapper {
+    margin-bottom: 100px;
+  }
+
+  .jd-audio-control-wrapper {
+    bottom: 0;
+    margin-bottom: 0;
+    position: fixed;
+    width: 100%;
+  }
 }
