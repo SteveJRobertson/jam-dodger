@@ -136,7 +136,9 @@ class App extends Component {
             text={jdConfig.noResultsText}
           />
         </div>
-        <AudioControlPanel />
+        <div className="jd-audio-control-wrapper">
+          <AudioControlPanel />
+        </div>
       </div>
     );
   }

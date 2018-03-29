@@ -24,7 +24,7 @@ class AudioButton extends Component {
 }
 
 AudioButton.defaultProps = {
-  color: 'green',
+  color: 'black',
   icon: 'play',
   size: 'huge',
 };
