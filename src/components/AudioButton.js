@@ -12,11 +12,11 @@ class AudioButton extends Component {
     this.state = {};
   }
 
-  componentWillMount() {}
+  componentDidMount() {}
 
   render() {
     return (
-      <button className={`jd-audio-button ${this.props.size} ui ${this.props.color} icon button`}>
+      <button onClick={this.props.onClick} className={`jd-audio-button ${this.props.size} ui ${this.props.color} icon button`}>
         <i className={`${this.props.icon} icon`} />
       </button>
     );
@@ -26,12 +26,14 @@ class AudioButton extends Component {
 AudioButton.defaultProps = {
   color: 'black',
   icon: 'play',
+  onClick: null,
   size: 'huge',
 };
 
 AudioButton.propTypes = {
   color: PropTypes.string,
   icon: PropTypes.string,
+  onClick: PropTypes.func,
   size: PropTypes.string,
 };
 

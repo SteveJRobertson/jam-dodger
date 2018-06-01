@@ -4,6 +4,9 @@
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
         "object-curly-newline": "off"
     },
+    "plugins": [
+        "transform-class-properties"
+    ],
     "env": {
         "browser": true,
         "jest": true,

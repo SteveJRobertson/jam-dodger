@@ -119,6 +119,10 @@ class App extends Component {
       });
   }
 
+  handleSpeechError = (error) => {
+    throw new Error(error);
+  }
+
   render() {
     return (
       <div className="App">
@@ -137,7 +141,7 @@ class App extends Component {
           />
         </div>
         <div className="jd-audio-control-wrapper">
-          <AudioControlPanel />
+          <AudioControlPanel statuses={this.state.statuses} />
         </div>
       </div>
     );
